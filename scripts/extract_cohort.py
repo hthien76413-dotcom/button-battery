@@ -20,84 +20,29 @@ from collections import Counter
 
 import pandas as pd
 
-XLSX = "10年消化道异物原始数据.xlsx"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cohort as C
+
+XLSX = C.XLSX
 OUTDIR = "output"
 
-# ---------- 关键词定义 ----------
-BATTERY_KW = ["纽扣电池", "扣状电池", "钮扣电池", "纽扣型电池", "扣式电池"]
-MAGNET_KW = ["磁珠", "磁铁", "巴克球", "吸铁石", "磁力球", "磁性异物"]
-COIN_KW = ["硬币"]
-
-# 首次 X 线定位映射规则（需两名读片者复核，见 PROTOCOL.md §4.3）
-LOC_RULES = [
-    ("esophagus", r"食管|食道|颈部食|胸[段部]食|纵隔|气管隆突|T\d+\s*水平"),
-    ("stomach", r"胃[内腔区壁]|胃泡|胃底|胃窦|左上腹|中上腹|上腹部?见"),
-    ("duodenum", r"十二指肠"),
-    ("small_bowel", r"回肠|空肠|小肠"),
-    ("colorectal", r"盆腔|下腹|结肠|直肠|骶髂|乙状"),
-    ("passed_or_absent", r"未见.{0,8}(不透|异物)|异物.{0,6}(已)?(消失|排出)|阳性异物已排出"),
-    ("abdomen_unspecified", r"腹部|腹腔|腰椎|L\d+\s*水平|中线|右中腹|左中腹"),
-]
-
-
-def collect_text(xl, sheets, keep_cols=None):
-    """按就诊编号聚合指定 sheet 的文本列。"""
-    out = {}
-    for s in sheets:
-        df = xl.parse(s)
-        if "科研就诊编号" not in df.columns:
-            continue
-        cols = [
-            c for c in df.columns
-            if c not in ("科研患者编号", "科研就诊编号")
-            and (pd.api.types.is_string_dtype(df[c]) or df[c].dtype == object)
-        ]
-        if keep_cols:
-            cols = [c for c in cols if c in keep_cols]
-        for _, r in df.iterrows():
-            v = r["科研就诊编号"]
-            txt = " ".join(str(r[c]) for c in cols if pd.notna(r[c]))
-            out[v] = out.get(v, "") + " " + txt
-    return out
-
-
-def parse_delay_hours(chief_complaint):
-    """从主诉解析误食至就诊时间（小时）。"""
-    s = str(chief_complaint)
-    m = re.search(r"(\d+(?:\.\d+)?)\s*(小时|天|日|周|月)", s)
-    if not m:
-        return None
-    n = float(m.group(1))
-    return n * {"小时": 1, "天": 24, "日": 24, "周": 168, "月": 720}[m.group(2)]
-
-
-def classify_location(text):
-    for label, pat in LOC_RULES:
-        if re.search(pat, text):
-            return label
-    return "undetermined"
-
-
-def classify_procedure(name):
-    n = re.sub(r"\s+", "", str(name))
-    if re.search(r"剖腹|修补|肠切|腹腔镜", n):
-        return "surgery"
-    if "食管" in n and re.search(r"取出|去除", n):
-        return "esophageal_endoscopic_removal"
-    if "十二指肠" in n and re.search(r"取出|去除", n):
-        return "duodenal_endoscopic_removal"
-    if re.search(r"异物", n) and re.search(r"取出|去除", n):
-        return "gastric_endoscopic_removal"
-    if re.search(r"胃镜检查|内镜检查", n):
-        return "diagnostic_endoscopy_only"
-    return "other"
+# 病例判定、部位映射、时间解析、操作分类等规则统一来自 cohort.py，
+# 避免同一套规则在两个脚本里各写一份（方案要求这些规则作为补充材料公开）。
+BATTERY_KW = C.BATTERY_KW
+MAGNET_KW = C.MAGNET_KW
+COIN_KW = C.COIN_KW
+LOC_RULES = C.LOC_RULES
+collect_text = C.collect_text
+parse_delay_hours = C.parse_delay_hours
+classify_location = C.classify_location
+classify_procedure = C.classify_procedure
 
 
 def main():
     if not os.path.exists(XLSX):
         sys.exit(f"未找到数据文件: {XLSX}")
     os.makedirs(OUTDIR, exist_ok=True)
-    xl = pd.ExcelFile(XLSX)
+    xl = C.load_workbook(XLSX)
 
     base = xl.parse("病案首页基本信息")
     adm = xl.parse("儿科入院记录")
