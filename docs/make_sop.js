@@ -1,7 +1,7 @@
 const {
   Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType,
   Table, TableRow, TableCell, WidthType, ShadingType, BorderStyle,
-  LevelFormat, PageBreak, PageNumber, Header, Footer, convertInchesToTwip,
+  LevelFormat, PageBreak, PageNumber, Header, Footer, ImageRun, convertInchesToTwip,
 } = require("docx");
 const fs = require("fs");
 
@@ -224,9 +224,26 @@ const doc = new Document({
       NUM("调取该患儿的首次腹部平片（正位）。使用首次片，不要用复查片——研究定义的是就诊时的电池规格。"),
       NUM("先确认这是电池而非硬币：正位可见双环征（double-halo）或台阶征，侧位可见斜面征（beveled edge）。若无法与硬币区分，记入待裁定。"),
       NUM("使用 PACS 的测量/卡尺工具，沿圆盘直径拉一条线，软件会读取 DICOM 标定直接给出毫米数。"),
-      NUM("量外环。双环征的外环是电池卷边外缘，那才是标称直径；内环偏小，量错会系统性低估。"),
+      NUM("量外环（见下图）。双环征的外环是电池卷边外缘，那才是标称直径；内环偏小，量错会系统性低估。"),
       NUM("同一枚电池量 3 次，取中位数，保留 2 位小数，记为“投影直径”。"),
       NUM("若为多枚电池，逐枚测量并编号（#1、#2…），分别记录。"),
+      new Paragraph({
+        alignment: AlignmentType.CENTER,
+        spacing: { before: 200, after: 60 },
+        children: [new ImageRun({
+          type: "png",
+          data: fs.readFileSync(__dirname + "/halo.png"),
+          transformation: { width: 580, height: 251 },
+        })],
+      }),
+      new Paragraph({
+        alignment: AlignmentType.CENTER,
+        spacing: { after: 220 },
+        children: [new TextRun({
+          text: "图 1　双环征的测量位置。卡尺应跨越外环全径；量内环会系统性低估约 3–5 mm，"
+              + "足以把一枚 20 mm 电池误判为 16 mm——恰好跨过分层线。",
+          font: FONT, size: 18, color: MUT })],
+      }),
       ...BOX("这一步量到的是投影直径，不是真实直径", [
         "PACS 给出的毫米数是探测器平面上的尺寸，仍包含放大。",
         "不要直接把这个数填进“电池直径”字段，必须先做第 5 节的校正。",
