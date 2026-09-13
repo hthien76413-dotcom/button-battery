@@ -233,3 +233,57 @@ def symptom_flags(text):
         if not h["negated"]:
             flags[h["symptom"]] = True
     return flags
+
+
+# ================= 影像：异物在位 / 已排出 =================
+# 放射报告与现病史有同样的否定陷阱，而且两个方向都会出错：
+#   假阳性 —— "未见液平面。消化道异物，位置较前" 跨句匹配成"已排出"，其实电池还在
+#   假阴性 —— "未见不透X线异物" 里含"不透X线异物"，被当成"仍在位"，其实已排出
+# 因此必须按片、按句、按片段做否定感知判定，不能对合并文本跑正则。
+
+FB_TERMS = [
+    "不透X线异物", "不透X光异物", "不透Ｘ线异物", "金属异物",
+    "异物影", "致密影", "高密度影", "扣式电池", "纽扣电池", "异物",
+]
+PASSED_TERMS = ["排出", "消失"]
+# 检查所见里常把送检目的原样写进来（"消化道异物"复查），那是适应证不是所见
+INDICATION_PAT = r"[“\"「]?消化道异物[”\"」]?\s*复查|异物\s*复查|复查[:：]"
+
+
+def classify_film_state(text):
+    """判定单张平片：异物在位 / 已排出 / 不明。
+
+    返回 (state, evidence)，state ∈ {'present','absent','unclear'}。
+    先看有无非否定的异物描述——有则在位；否则看有无否定或"已排出"的描述。
+    """
+    t = str(text).replace("不慎", "意外")
+    t = re.sub(INDICATION_PAT, " ", t)      # 去掉送检目的，避免误判为所见
+    present_ev, absent_ev = None, None
+
+    for sentence in re.split(SENT_SEP, t):
+        if not sentence.strip():
+            continue
+        carry_neg = False
+        for frag in re.split(FRAG_SEP, sentence):
+            if not frag.strip():
+                continue
+            neg_i = _first_marker(frag, NEG_MARKERS)
+            pos_i = _first_marker(frag, POS_MARKERS)
+            if neg_i is not None and (pos_i is None or neg_i < pos_i):
+                carry_neg = True
+            elif pos_i is not None and (neg_i is None or pos_i < neg_i):
+                carry_neg = False
+
+            if not any(term in frag for term in FB_TERMS):
+                continue
+            explicit_passed = any(p in frag for p in PASSED_TERMS)
+            if carry_neg or explicit_passed:
+                absent_ev = absent_ev or frag.strip()[:60]
+            else:
+                present_ev = present_ev or frag.strip()[:60]
+
+    if present_ev:
+        return "present", present_ev
+    if absent_ev:
+        return "absent", absent_ev
+    return "unclear", None

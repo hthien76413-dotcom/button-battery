@@ -77,11 +77,11 @@ def main():
     )
     nfilms = xray[xray["科研就诊编号"].isin(battery)].groupby("科研就诊编号").size()
     # 自然排出需检索全部复查片，而非仅首张
-    allfilm = (
+    filmtexts = (
         xray[xray["科研就诊编号"].isin(battery)]
-        .assign(_t=lambda d: d["检查所见"].astype(str) + " " + d["检查结论"].astype(str))
+        .assign(_t=lambda d: d["检查所见"].astype(str) + "。" + d["检查结论"].astype(str))
         .groupby("科研就诊编号")["_t"]
-        .apply(" ".join)
+        .apply(list)
     )
 
     # ---- 操作 ----
@@ -115,9 +115,10 @@ def main():
             "delay_h": parse_delay_hours(cc.get(v, "")),
             "first_film_location": classify_location(film_txt) if film_txt else "no_film",
             "n_films": int(nfilms.get(v, 0)),
-            "documented_passage": bool(
-                re.search(r"异物.{0,6}(已)?(排出|消失)|阳性异物已排出|未见.{0,8}(不透|异物)",
-                          allfilm.get(v, ""))
+            # 逐片否定感知判定；旧的合并文本正则会把
+            # "未见液平面。消化道异物，位置较前" 误判为已排出
+            "documented_passage": any(
+                C.classify_film_state(t)[0] == "absent" for t in filmtexts.get(v, [])
             ),
             "procedure": proc_by_visit.get(v, "none_observation"),
             "multiple_objects": bool(re.search(r"两枚|2枚|三枚|3枚|多枚|数枚|两颗|2颗", core.get(v, ""))),
