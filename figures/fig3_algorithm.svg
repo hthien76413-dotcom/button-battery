@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 1034" width="1150" height="1034" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" role="img" aria-label="Risk-stratified algorithm for button batteries located beyond the esophagus in children">
+<style>
+  .box{fill:#ffffff;stroke:#1a1a1a;stroke-width:1.2}
+  .dec{fill:#f1f4f5;stroke:#1a1a1a;stroke-width:1.2}
+  .hdr{fill:#e6eaec;stroke:#1a1a1a;stroke-width:1.2}
+  .off{fill:#ffffff;stroke:#6e7679;stroke-width:1;stroke-dasharray:4 3}
+  .novel{fill:#fcefe1;stroke:#A0480A;stroke-width:2.2}
+  .t{font-size:13.5px;font-weight:700;fill:#111111}
+  .q{font-size:13.5px;font-weight:700;font-style:italic;fill:#111111}
+  .b{font-size:11.5px;fill:#232323}
+  .s{font-size:10.5px;fill:#4a4a4a}
+  .tag{font-size:9.5px;font-weight:700;letter-spacing:.05em;fill:#5c6468}
+  .tagn{font-size:9.5px;font-weight:700;letter-spacing:.05em;fill:#A0480A}
+  .yn{font-size:11px;font-weight:700;fill:#111111}
+  .ln{stroke:#1a1a1a;stroke-width:1.2;fill:none}
+  .ah{fill:#1a1a1a}
+  .fn{font-size:10px;fill:#333333}
+</style>
+<rect x="0" y="0" width="1150" height="1034" fill="#ffffff"/>
+
+<!-- A -->
+<rect class="box" x="150" y="16" width="500" height="54" rx="2"/>
+<text class="t" x="400" y="40" text-anchor="middle">Confirmed button battery ingestion</text>
+<text class="b" x="400" y="58" text-anchor="middle">Two-view radiographs: neck, chest and abdomen</text>
+<path class="ln" d="M400 70 L400 92"/><polygon class="ah" points="400,100 395,91 405,91"/>
+
+<!-- B decision -->
+<rect class="dec" x="150" y="100" width="500" height="44" rx="2"/>
+<text class="q" x="400" y="128" text-anchor="middle">Is the battery distal to the esophagus?</text>
+<text class="yn" x="662" y="116">No</text>
+<path class="ln" d="M650 122 L740 122"/><polygon class="ah" points="748,122 739,117 739,127"/>
+<rect class="off" x="750" y="96" width="380" height="52" rx="2"/>
+<text class="t" x="766" y="118">No — esophageal battery</text>
+<text class="s" x="766" y="136">Remove within 2 h. Outside the scope of this algorithm.</text>
+<text class="yn" x="408" y="165">Yes</text>
+<path class="ln" d="M400 144 L400 168"/><polygon class="ah" points="400,176 395,167 405,167"/>
+
+<!-- D universal -->
+<rect class="box" x="100" y="176" width="600" height="104" rx="2"/>
+<text class="t" x="116" y="198">Universal measures</text>
+<text class="b" x="116" y="218">• Keep nil by mouth</text>
+<text class="b" x="116" y="236">• Confirm the disc is a battery, not a coin: double-halo or step-off sign (frontal),</text>
+<text class="b" x="128" y="250">beveled edge (lateral)</text>
+<text class="b" x="116" y="270">• Honey and sucralfate have no role once the battery is past the esophagus</text>
+<path class="ln" d="M400 280 L400 302"/><polygon class="ah" points="400,310 395,301 405,301"/>
+
+<!-- E red flags -->
+<rect class="dec" x="100" y="310" width="600" height="110" rx="2"/>
+<text class="q" x="116" y="332">Any red flag present?</text>
+<text class="s" x="116" y="348">any one of the following</text>
+<text class="b" x="116" y="370">• Hematemesis or melena</text>
+<text class="b" x="116" y="386">• Dysphagia, odynophagia or drooling</text>
+<text class="b" x="116" y="402">• Chest or abdominal pain, tenderness</text>
+<text class="b" x="420" y="370">• Persistent vomiting or refusal to feed</text>
+<text class="b" x="420" y="386">• Fever or peritonism</text>
+<text class="b" x="420" y="402">• Co-ingested magnet, or &gt; 1 battery</text>
+<text class="yn" x="706" y="358">Yes</text>
+<path class="ln" d="M700 365 L740 365"/><polygon class="ah" points="748,365 739,360 739,370"/>
+<rect class="box" x="750" y="330" width="380" height="80" rx="2"/>
+<text class="t" x="766" y="352">Emergency endoscopy within 12 h</text>
+<text class="b" x="766" y="372">Survey the esophagus on intubation, then retrieve.</text>
+<text class="b" x="766" y="390">Peritonism or free air → surgery, not endoscopy.</text>
+<text class="yn" x="408" y="441">No</text>
+<path class="ln" d="M400 420 L400 442"/><polygon class="ah" points="400,450 395,441 405,441"/>
+
+<!-- banner -->
+<rect class="hdr" x="30" y="450" width="1100" height="30" rx="2"/>
+<text class="t" x="46" y="470">Stratify every remaining child by transit risk and battery location</text>
+
+<!-- column headers -->
+<rect class="hdr" x="320" y="490" width="400" height="30" rx="2"/>
+<text class="t" x="520" y="510" text-anchor="middle">Stomach or duodenum</text>
+<rect class="hdr" x="730" y="490" width="400" height="30" rx="2"/>
+<text class="t" x="930" y="510" text-anchor="middle">Distal to the duodenum</text>
+
+<!-- row 1: high risk -->
+<rect class="hdr" x="30" y="526" width="280" height="136" rx="2"/>
+<text class="t" x="44" y="550">HIGH transit risk</text>
+<text class="s" x="44" y="566">any one of:</text>
+<text class="b" x="44" y="588">• &gt; 12 h since ingestion, or</text>
+<text class="b" x="56" y="602">timing unwitnessed / unknown</text>
+<text class="b" x="44" y="622">• Diameter ≥ 20 mm</text>
+<text class="b" x="44" y="640">• Age &lt; 5 years</text>
+
+<rect class="box" x="320" y="526" width="400" height="136" rx="2"/>
+<text class="t" x="336" y="552">Endoscopy within 12–24 h</text>
+<text class="b" x="336" y="574">Retrieve the battery, and grade both</text>
+<text class="b" x="336" y="590">esophageal and gastric mucosa (Zargar).</text>
+<text class="tag" x="336" y="646">CONSISTENT WITH CURRENT GUIDELINES</text>
+
+<rect class="novel" x="730" y="526" width="400" height="136" rx="2"/>
+<text class="t" x="746" y="552">Consider diagnostic endoscopy</text>
+<text class="b" x="746" y="574">The battery is beyond reach — retrieval is not</text>
+<text class="b" x="746" y="590">the question. Scope to grade the esophagus for</text>
+<text class="b" x="746" y="606">transit injury, which can be clinically silent.</text>
+<text class="tagn" x="746" y="646">PROPOSED BY THIS STUDY — NEEDS VALIDATION</text>
+
+<!-- row 2: low risk -->
+<rect class="hdr" x="30" y="670" width="280" height="136" rx="2"/>
+<text class="t" x="44" y="694">LOW transit risk</text>
+<text class="s" x="44" y="710">all of:</text>
+<text class="b" x="44" y="732">• Witnessed, ≤ 12 h ago</text>
+<text class="b" x="44" y="750">• Diameter &lt; 20 mm</text>
+<text class="b" x="44" y="768">• Age ≥ 5 years</text>
+
+<rect class="box" x="320" y="670" width="400" height="136" rx="2"/>
+<text class="t" x="336" y="696">Observe</text>
+<text class="b" x="336" y="718">Repeat radiograph at 7–14 days if passage is</text>
+<text class="b" x="336" y="734">not confirmed in stool. Endoscopic removal</text>
+<text class="b" x="336" y="750">only if still gastric then, or if symptoms develop.</text>
+<text class="tag" x="336" y="790">CONSISTENT WITH CURRENT GUIDELINES</text>
+
+<rect class="box" x="730" y="670" width="400" height="136" rx="2"/>
+<text class="t" x="746" y="696">Expectant management</text>
+<text class="b" x="746" y="718">Stool checks. Radiograph at 7–14 days if</text>
+<text class="b" x="746" y="734">passage is not confirmed.</text>
+<text class="tag" x="746" y="790">CONSISTENT WITH CURRENT GUIDELINES</text>
+
+<!-- safety net -->
+<rect class="box" x="30" y="824" width="1100" height="92" rx="2"/>
+<text class="t" x="46" y="846">All patients — discharge safety-net</text>
+<text class="b" x="46" y="868">Return immediately for dysphagia, hematemesis, chest or abdominal pain, or fever. Esophageal stricture and aorto-esophageal or</text>
+<text class="b" x="46" y="884">tracheo-esophageal fistula can present 1–3 weeks after ingestion. During observation, escalate for new symptoms, failure of the</text>
+<text class="b" x="46" y="900">battery to progress on serial films, or free intraperitoneal air.</text>
+
+<!-- legend -->
+<rect class="box" x="30" y="926" width="16" height="12"/>
+<text class="s" x="54" y="936">Consistent with current guidelines (NASPGHAN, ESPGHAN, NCPC)</text>
+<rect class="novel" x="452" y="926" width="16" height="12"/>
+<text class="s" x="476" y="936">Proposed by this study; requires prospective validation</text>
+<rect class="off" x="880" y="926" width="16" height="12"/>
+<text class="s" x="904" y="936">Outside this algorithm</text>
+
+<!-- footnotes -->
+<text class="fn" x="30" y="966">a  Complication risk rises with time to removal: OR 3.71 for ≥ 10 h and OR 5.12 for ≥ 12 h (systematic review and meta-analysis, 44 studies, 3125 children).</text>
+<text class="fn" x="30" y="982">b  Battery diameter ≥ 20 mm: OR 4.34 for any complication (same source). Where the diameter is not charted, measure the disc on the radiograph DICOM.</text>
+<text class="fn" x="30" y="998">c  The nearest comparator cohort (68 children, all of whom underwent endoscopic retrieval) recommended gastric retrieval within 12 h but had no observation arm.</text>
+<text class="fn" x="30" y="1014">d  In the present cohort, 3 children whose battery was already distal to the esophagus had esophageal mucosal injury at endoscopy, and 5 endoscopies found no battery.</text>
+</svg>

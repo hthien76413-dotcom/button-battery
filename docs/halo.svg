@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 268" width="620" height="268"
+     font-family="WenQuanYi Zen Hei, Noto Sans CJK SC, sans-serif">
+<style>
+  .ttl{font-size:14px;font-weight:bold}
+  .ok{fill:#0E5B6E}
+  .no{fill:#A0480A}
+  .mut{fill:#4E5961}
+  .ink{fill:#1A1A1A}
+  .cap{font-size:11.5px;fill:#4E5961}
+  .dim{font-size:11.5px;font-weight:bold}
+  .lead{stroke:#4E5961;stroke-width:0.9;fill:none}
+  .ext{stroke-width:1;fill:none}
+</style>
+<rect x="0" y="0" width="620" height="268" fill="#ffffff"/>
+
+<!-- ============ 面板 1：正确 ============ -->
+<path d="M42 19 L48 25 L58 12" stroke="#0E5B6E" stroke-width="3.2" fill="none"
+      stroke-linecap="round" stroke-linejoin="round"/>
+<text class="ttl ok" x="112" y="24" text-anchor="middle">正确：量外环</text>
+
+<circle cx="100" cy="112" r="48" fill="#E8ECEE" stroke="#1A1A1A" stroke-width="3.5"/>
+<circle cx="100" cy="112" r="40" fill="#FFFFFF" stroke="#9AA8B1" stroke-width="1.2"/>
+<circle cx="100" cy="112" r="30" fill="#C8D0D4" stroke="#1A1A1A" stroke-width="2.5"/>
+
+<!-- 引线标注 -->
+<path class="lead" d="M134 78 L152 62"/>
+<text class="cap" x="155" y="60">外环＝卷边外缘</text>
+<path class="lead" d="M121 133 L150 160"/>
+<text class="cap" x="153" y="164">内环</text>
+
+<!-- 尺寸线：跨越外环全径 -->
+<line class="ext" x1="52" y1="162" x2="52" y2="196" stroke="#0E5B6E"/>
+<line class="ext" x1="148" y1="162" x2="148" y2="196" stroke="#0E5B6E"/>
+<line x1="56" y1="190" x2="144" y2="190" stroke="#0E5B6E" stroke-width="1.6"/>
+<polygon points="52,190 60,186 60,194" fill="#0E5B6E"/>
+<polygon points="148,190 140,186 140,194" fill="#0E5B6E"/>
+<text class="dim ok" x="100" y="215" text-anchor="middle">标称直径</text>
+<text class="cap" x="100" y="232" text-anchor="middle">用于分层判断</text>
+
+<!-- ============ 面板 2：错误 ============ -->
+<path d="M252 13 L264 25 M264 13 L252 25" stroke="#A0480A" stroke-width="3.2"
+      fill="none" stroke-linecap="round"/>
+<text class="ttl no" x="322" y="24" text-anchor="middle">错误：量内环</text>
+
+<circle cx="310" cy="112" r="48" fill="#E8ECEE" stroke="#1A1A1A" stroke-width="3.5"/>
+<circle cx="310" cy="112" r="40" fill="#FFFFFF" stroke="#9AA8B1" stroke-width="1.2"/>
+<circle cx="310" cy="112" r="30" fill="#FAEBDE" stroke="#A0480A" stroke-width="2.5"/>
+
+<line class="ext" x1="280" y1="145" x2="280" y2="196" stroke="#A0480A"/>
+<line class="ext" x1="340" y1="145" x2="340" y2="196" stroke="#A0480A"/>
+<line x1="284" y1="190" x2="336" y2="190" stroke="#A0480A" stroke-width="1.6"/>
+<polygon points="280,190 288,186 288,194" fill="#A0480A"/>
+<polygon points="340,190 332,186 332,194" fill="#A0480A"/>
+<text class="dim no" x="310" y="215" text-anchor="middle">低估约 3–5 mm</text>
+<text class="cap" x="310" y="232" text-anchor="middle">可把 20 mm 误判为 16 mm</text>
+
+<!-- ============ 面板 3：硬币对照 ============ -->
+<text class="ttl mut" x="520" y="24" text-anchor="middle">对照：硬币</text>
+
+<circle cx="520" cy="112" r="48" fill="#DCE1E4" stroke="#1A1A1A" stroke-width="3.5"/>
+
+<text class="cap" x="520" y="215" text-anchor="middle">均质圆盘，无双环征</text>
+<text class="cap" x="520" y="232" text-anchor="middle">不可纳入电池队列</text>
+
+<!-- 分隔线 -->
+<line x1="415" y1="40" x2="415" y2="240" stroke="#D6DCE0" stroke-width="1" stroke-dasharray="3 3"/>
+</svg>
